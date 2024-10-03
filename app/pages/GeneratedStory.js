@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-const GeneratedStory = ({ story, onBack }) => {
+const GeneratedStory = ({ story, onBack, resubmit }) => {
   const extractTitleAndStory = (storyText) => {
     const lines = storyText.split("\n");
     const title = lines.find((line) => line.trim() !== "").trim();
@@ -27,21 +27,31 @@ const GeneratedStory = ({ story, onBack }) => {
           property="og:description"
           content={`Read the generated story titled "${title}" created with BedtimeStories.AI.`}
         />
-        <meta property="og:image" content="/path-to-your-image.png" />{" "}
-        {/* Update with your image path */}
+        <meta property="og:image" content="/path-to-your-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
-      <div className="max-w-md mx-auto p-6 rounded-lg shadow-lg bg-gray-800 text-white">
+      <div className="max-w-md mx-auto p-6 rounded-lg shadow-lg bg-lightBeige text-gray-900">
         <h2 className="font-bold text-2xl mb-4">{title}</h2>
-        <p className="whitespace-pre-wrap text-gray-300">{extractedStory}</p>
+        <p className="whitespace-pre-wrap">{extractedStory}</p>
 
-        <button
-          onClick={() => onBack()}
-          className="mt-6 w-full p-3 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-400 transition duration-300 transform hover:scale-105"
-        >
-          Back
-        </button>
+        <div className="flex justify-between mt-6 space-x-4">
+          {/* Back button */}
+          <button
+            onClick={() => onBack()}
+            className="w-full p-3 bg-coralRed rounded hover:bg-softPeach focus:outline-none focus:ring-4 focus:ring-softPeach transition duration-300 transform hover:scale-105"
+          >
+            back
+          </button>
+
+          {/* Refresh button */}
+          <button
+            onClick={(e) => resubmit(e)}
+            className="w-full p-3 bg-warmOrange  rounded hover:bg-lightBeige focus:outline-none focus:ring-4 focus:ring-lightBeige transition duration-300 transform hover:scale-105 flex items-center justify-center"
+          >
+            re-generate
+          </button>
+        </div>
       </div>
     </>
   );

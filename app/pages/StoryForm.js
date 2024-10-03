@@ -74,7 +74,13 @@ const StoryForm = () => {
 
   if (loading) return <Loading />;
   if (story)
-    return <GeneratedStory story={story} onBack={() => clearValues()} />;
+    return (
+      <GeneratedStory
+        story={story}
+        onBack={() => clearValues()}
+        resubmit={(e) => handleSubmit(e)}
+      />
+    );
 
   return (
     <>
@@ -96,14 +102,12 @@ const StoryForm = () => {
           property="og:description"
           content="Create personalized bedtime stories for kids using BedtimeStories.AI. Choose genre, theme, and characters for a unique adventure!"
         />
-        <meta property="og:image" content="/images/og-image.png" />{" "}
-        {/* Update with your image path */}
-        <meta property="og:url" content="https://your-domain.com" />{" "}
-        {/* Update with your domain */}
+        <meta property="og:image" content="/images/og-image.png" />
+        <meta property="og:url" content="https://your-domain.com" />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
-      <div className="max-w-md mx-auto p-6 rounded-lg shadow-lg bg-gray-800 text-white">
+      <div className="max-w-md mx-auto p-6 rounded-lg shadow-lg bg-lightBeige text-gray-900">
         {!loading && (
           <h1 className="font-bold text-2xl text-center sm:text-left mb-6 font-[family-name:var(--font-geist-mono)]">
             BedtimeStories.AI
@@ -112,15 +116,15 @@ const StoryForm = () => {
         {!loading && !story && (
           <form
             onSubmit={handleSubmit}
-            className="space-y-4 text-gray-300 font-[family-name:var(--font-geist-mono)]"
+            className="space-y-4 font-[family-name:var(--font-geist-mono)]"
           >
             <select
               value={storyLength}
               onChange={(e) => setStoryLength(e.target.value)}
               className={
-                age === ""
-                  ? "text-gray-400 w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
-                  : "w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+                storyLength === ""
+                  ? "text-gray-400 w-full p-3 bg-pastelPink border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-softPeach transition duration-200"
+                  : "w-full p-3 bg-pastelPink border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-softPeach transition duration-200"
               }
               required
             >
@@ -133,13 +137,14 @@ const StoryForm = () => {
                 </option>
               ))}
             </select>
+
             <select
               value={age.toString()}
               onChange={(e) => setAge(e.target.value)}
               className={
                 age === ""
-                  ? "text-gray-400 w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
-                  : "w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+                  ? "text-gray-400 w-full p-3 bg-pastelPink border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-softPeach transition duration-200"
+                  : "w-full p-3 bg-pastelPink border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-softPeach transition duration-200"
               }
               required
             >
@@ -152,12 +157,13 @@ const StoryForm = () => {
                 </option>
               ))}
             </select>
+
             <input
               type="text"
               placeholder="protagonist's name"
               value={protagonist}
               onChange={(e) => setProtagonist(e.target.value)}
-              className="w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+              className="w-full p-3 bg-pastelPink border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-softPeach transition duration-200"
               required
             />
             <input
@@ -165,7 +171,7 @@ const StoryForm = () => {
               placeholder="antagonist's name"
               value={antagonist}
               onChange={(e) => setAntagonist(e.target.value)}
-              className="w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+              className="w-full p-3 bg-pastelPink border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-softPeach transition duration-200"
               required
             />
             <select
@@ -173,8 +179,8 @@ const StoryForm = () => {
               onChange={(e) => setGenre(e.target.value)}
               className={
                 genre === ""
-                  ? "text-gray-400 w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
-                  : "w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+                  ? "text-gray-400 w-full p-3 bg-pastelPink border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-softPeach transition duration-200"
+                  : "w-full p-3 bg-pastelPink border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-softPeach transition duration-200"
               }
               required
             >
@@ -187,13 +193,14 @@ const StoryForm = () => {
                 </option>
               ))}
             </select>
+
             <select
               value={theme}
               onChange={(e) => setTheme(e.target.value)}
               className={
                 theme === ""
-                  ? "text-gray-400 w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
-                  : "w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+                  ? "text-gray-400 w-full p-3 bg-pastelPink border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-softPeach transition duration-200"
+                  : "w-full p-3 bg-pastelPink border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-softPeach transition duration-200"
               }
               required
             >
@@ -206,13 +213,14 @@ const StoryForm = () => {
                 </option>
               ))}
             </select>
+
             <select
               value={ending}
               onChange={(e) => setEnding(e.target.value)}
               className={
                 ending === ""
-                  ? "text-gray-400 w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
-                  : "w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+                  ? "text-gray-400 w-full p-3 bg-pastelPink border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-softPeach transition duration-200"
+                  : "w-full p-3 bg-pastelPink border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-softPeach transition duration-200"
               }
               required
             >
@@ -228,7 +236,7 @@ const StoryForm = () => {
 
             <button
               type="submit"
-              className="w-full p-3 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-400 transition duration-300 transform hover:scale-105"
+              className="w-full p-3 bg-coralRed rounded-lg hover:bg-warmOrange focus:outline-none focus:ring-4 focus:ring-lightBeige transition duration-300 transform hover:scale-105"
             >
               Generate Story
             </button>
