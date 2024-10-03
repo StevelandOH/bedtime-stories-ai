@@ -37,7 +37,7 @@ const GeneratedStory = ({ story, onBack }) => {
         <p className="whitespace-pre-wrap text-gray-300">{extractedStory}</p>
 
         <button
-          onClick={onBack}
+          onClick={() => onBack()}
           className="mt-6 w-full p-3 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-400 transition duration-300 transform hover:scale-105"
         >
           Back

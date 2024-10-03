@@ -11,17 +11,14 @@ const GeneratedStory = dynamic(() => import("./GeneratedStory"), {
 });
 const Loading = dynamic(() => import("./Loading"), { ssr: false });
 
-const StoryTeller = () => {
+const StoryForm = () => {
   const [genre, setGenre] = useState("");
   const [protagonist, setProtagonist] = useState("");
   const [antagonist, setAntagonist] = useState("");
   const [theme, setTheme] = useState("");
-  const [ending, setEnding] = useState(""); // Ending state now included
+  const [ending, setEnding] = useState("");
   const [age, setAge] = useState("");
   const [storyLength, setStoryLength] = useState("");
-  const [step, setStep] = useState(0); // Track current input step
-  const [isNextDisabled, setIsNextDisabled] = useState(true); // Disable the Next button until input is valid
-  const [showModal, setShowModal] = useState(false); // Show modal with form values for confirmation
   const [story, setStory] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -37,14 +34,14 @@ const StoryTeller = () => {
     setProtagonist("");
     setAntagonist("");
     setTheme("");
-    setEnding(""); // Reset ending
+    setEnding("");
     setAge("");
     setStoryLength("");
-    setStep(0);
-    setIsNextDisabled(true);
+    setStory("");
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setLoading(true);
     setError("");
 
@@ -57,45 +54,27 @@ const StoryTeller = () => {
     - Theme: ${theme} 
     - Ending: ${ending}.`;
 
+    let result;
+
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const result = await model.generateContent(prompt);
+      result = await model.generateContent(prompt);
       const text = result.response.text();
-      if (!text) throw new Error("Failed to fetch story");
+      if (!text) {
+        throw new Error("Failed to fetch story");
+      }
       setStory(text);
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
-      setShowModal(false); // Close modal after submission
-    }
-  };
-
-  const handleNext = () => {
-    if (step === 6) {
-      // On the last step (after selecting ending), show the modal
-      setShowModal(true);
-    } else {
-      // Move to the next input step
-      setStep(step + 1);
-      setIsNextDisabled(true); // Disable "Next" button until the next input is valid
-    }
-  };
-
-  const handleInputChange = (setter) => (e) => {
-    setter(e.target.value);
-    setIsNextDisabled(e.target.value === ""); // Enable "Next" button only when input is valid
-  };
-
-  const preventFormReset = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault(); // Prevent form reset when pressing "Enter"
     }
   };
 
   if (loading) return <Loading />;
-  if (story) return <GeneratedStory story={story} onBack={clearValues} />;
+  if (story)
+    return <GeneratedStory story={story} onBack={() => clearValues()} />;
 
   return (
     <>
@@ -117,27 +96,36 @@ const StoryTeller = () => {
           property="og:description"
           content="Create personalized bedtime stories for kids using BedtimeStories.AI. Choose genre, theme, and characters for a unique adventure!"
         />
-        <meta property="og:image" content="/images/og-image.png" />
-        <meta property="og:url" content="https://your-domain.com" />
+        <meta property="og:image" content="/images/og-image.png" />{" "}
+        {/* Update with your image path */}
+        <meta property="og:url" content="https://your-domain.com" />{" "}
+        {/* Update with your domain */}
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
       <div className="max-w-md mx-auto p-6 rounded-lg shadow-lg bg-gray-800 text-white">
-        <h1 className="font-bold text-2xl text-center mb-6">
-          BedtimeStories.AI
-        </h1>
-
-        <form className="space-y-4 text-gray-300" onKeyDown={preventFormReset}>
-          {/* Render inputs based on the current step */}
-          {step === 0 && (
+        {!loading && (
+          <h1 className="font-bold text-2xl text-center sm:text-left mb-6 font-[family-name:var(--font-geist-mono)]">
+            BedtimeStories.AI
+          </h1>
+        )}
+        {!loading && !story && (
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-4 text-gray-300 font-[family-name:var(--font-geist-mono)]"
+          >
             <select
               value={storyLength}
-              onChange={handleInputChange(setStoryLength)}
-              className="w-full p-3 bg-gray-700 border border-gray-600 rounded"
+              onChange={(e) => setStoryLength(e.target.value)}
+              className={
+                age === ""
+                  ? "text-gray-400 w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+                  : "w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+              }
               required
             >
               <option value="" disabled>
-                Select story length
+                story length
               </option>
               {SELECTOR_DATA.STORY_LENGTH.map((type, idx) => (
                 <option key={idx} value={type}>
@@ -145,16 +133,18 @@ const StoryTeller = () => {
                 </option>
               ))}
             </select>
-          )}
-          {step === 1 && (
             <select
-              value={age}
-              onChange={handleInputChange(setAge)}
-              className="w-full p-3 bg-gray-700 border border-gray-600 rounded"
+              value={age.toString()}
+              onChange={(e) => setAge(e.target.value)}
+              className={
+                age === ""
+                  ? "text-gray-400 w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+                  : "w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+              }
               required
             >
               <option value="" disabled>
-                Select child's age
+                child's age
               </option>
               {SELECTOR_DATA.AGE_SELECTOR.map((type, idx) => (
                 <option key={idx} value={type}>
@@ -162,36 +152,34 @@ const StoryTeller = () => {
                 </option>
               ))}
             </select>
-          )}
-          {step === 2 && (
             <input
               type="text"
-              placeholder="Protagonist's name"
+              placeholder="protagonist's name"
               value={protagonist}
-              onChange={handleInputChange(setProtagonist)}
-              className="w-full p-3 bg-gray-700 border border-gray-600 rounded"
+              onChange={(e) => setProtagonist(e.target.value)}
+              className="w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
               required
             />
-          )}
-          {step === 3 && (
             <input
               type="text"
-              placeholder="Antagonist's name"
+              placeholder="antagonist's name"
               value={antagonist}
-              onChange={handleInputChange(setAntagonist)}
-              className="w-full p-3 bg-gray-700 border border-gray-600 rounded"
+              onChange={(e) => setAntagonist(e.target.value)}
+              className="w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
               required
             />
-          )}
-          {step === 4 && (
             <select
               value={genre}
-              onChange={handleInputChange(setGenre)}
-              className="w-full p-3 bg-gray-700 border border-gray-600 rounded"
+              onChange={(e) => setGenre(e.target.value)}
+              className={
+                genre === ""
+                  ? "text-gray-400 w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+                  : "w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+              }
               required
             >
               <option value="" disabled>
-                Select genre
+                select genre
               </option>
               {SELECTOR_DATA.STORY_TYPES.map((type, idx) => (
                 <option key={idx} value={type}>
@@ -199,16 +187,18 @@ const StoryTeller = () => {
                 </option>
               ))}
             </select>
-          )}
-          {step === 5 && (
             <select
               value={theme}
-              onChange={handleInputChange(setTheme)}
-              className="w-full p-3 bg-gray-700 border border-gray-600 rounded"
+              onChange={(e) => setTheme(e.target.value)}
+              className={
+                theme === ""
+                  ? "text-gray-400 w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+                  : "w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+              }
               required
             >
               <option value="" disabled>
-                Select theme
+                select theme
               </option>
               {SELECTOR_DATA.MORALS.map((type, idx) => (
                 <option key={idx} value={type}>
@@ -216,16 +206,18 @@ const StoryTeller = () => {
                 </option>
               ))}
             </select>
-          )}
-          {step === 6 && (
             <select
               value={ending}
-              onChange={handleInputChange(setEnding)}
-              className="w-full p-3 bg-gray-700 border border-gray-600 rounded"
+              onChange={(e) => setEnding(e.target.value)}
+              className={
+                ending === ""
+                  ? "text-gray-400 w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+                  : "w-full p-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+              }
               required
             >
               <option value="" disabled>
-                Select ending
+                select ending
               </option>
               {SELECTOR_DATA.ENDING_TYPES.map((type, idx) => (
                 <option key={idx} value={type}>
@@ -233,68 +225,19 @@ const StoryTeller = () => {
                 </option>
               ))}
             </select>
-          )}
 
-          {/* Next button */}
-          <button
-            type="button"
-            className="w-full p-3 bg-blue-600 text-white rounded hover:bg-blue-700"
-            onClick={handleNext}
-            disabled={isNextDisabled}
-          >
-            {step === 6 ? "Review" : "Next"}
-          </button>
-        </form>
-
+            <button
+              type="submit"
+              className="w-full p-3 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-400 transition duration-300 transform hover:scale-105"
+            >
+              Generate Story
+            </button>
+          </form>
+        )}
         {error && <p className="mt-4 text-red-500">{error}</p>}
       </div>
-
-      {/* Modal for reviewing the form values */}
-      {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
-          <div className="bg-white p-8 rounded-lg shadow-lg text-gray-800">
-            <h2 className="text-xl font-bold mb-4">Review Your Selections</h2>
-            <p>
-              <strong>Story Length:</strong> {storyLength}
-            </p>
-            <p>
-              <strong>Age:</strong> {age}
-            </p>
-            <p>
-              <strong>Protagonist:</strong> {protagonist}
-            </p>
-            <p>
-              <strong>Antagonist:</strong> {antagonist}
-            </p>
-            <p>
-              <strong>Genre:</strong> {genre}
-            </p>
-            <p>
-              <strong>Theme:</strong> {theme}
-            </p>
-            <p>
-              <strong>Ending:</strong> {ending}
-            </p>
-
-            <div className="mt-6 flex justify-between">
-              <button
-                className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
-                onClick={handleSubmit}
-              >
-                Generate
-              </button>
-              <button
-                className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
-                onClick={clearValues}
-              >
-                Edit
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 };
 
-export default StoryTeller;
+export default StoryForm;

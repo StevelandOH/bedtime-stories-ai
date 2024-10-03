@@ -1,5 +1,4 @@
 import Head from "next/head";
-import StoryTeller from "./StoryForm-stable";
 import StoryForm from "./StoryForm";
 
 const LandingPage = () => {
