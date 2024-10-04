@@ -125,15 +125,25 @@ const StoryForm = () => {
     <div className="max-w-lg mx-auto rounded-3xl shadow-[0.1rem_0.1rem_.1rem_rgb(0,0,0,0.2)]">
       <div className="max-w-lg mx-auto px-6 py-2 rounded-3xl shadow-[-0.2rem_-0.1rem_0.1rem_rgb(255,255,255,0.8)] bg-whiteSmoke">
         {!loading && (
-          <h1 className="text-center font-mono text-smokeyGrey text-bold text-xs py-12 mb-8">
+          <h1 className="text-center font-mono text-smokeyGrey text-bold text-xs py-12">
             BedtimeStories.AI
           </h1>
         )}
+
         {!loading && !story && (
           <form
             onSubmit={handleSubmit}
             className="space-y-4 font-mono text-darkGrey"
           >
+            {/* Submit Button */}
+            <div className="w-full text-center px-12 ">
+              <button
+                type="submit"
+                className="mb-12 text-center text-whiteSmoke font-bold px-5 py-10 rounded-full bg-indigo-400 border-none focus:outline-none focus:ring-2 focus:ring-white transition duration-300 text-xs"
+              >
+                generate
+              </button>
+            </div>
             <div className="grid grid-cols-2 gap-4 mb-12 px-12">
               {/* Character 1 Input */}
               <div className="shadow-[-0.1rem_-0.1rem_.1rem_rgb(0,0,0,0.2)] rounded-full">
@@ -184,16 +194,6 @@ const StoryForm = () => {
                   required
                 />
               </div>
-            </div>
-
-            {/* Submit Button */}
-            <div className="w-full text-center px-12 ">
-              <button
-                type="submit"
-                className="m-1 text-center text-whiteSmoke font-bold px-5 py-10 rounded-full bg-indigo-400 border-none focus:outline-none focus:ring-2 focus:ring-white transition duration-300 text-xs"
-              >
-                generate
-              </button>
             </div>
 
             {/* Dropdown Selectors */}
