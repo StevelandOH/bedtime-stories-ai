@@ -32,12 +32,6 @@ export const SELECTOR_DATA = {
     "unresolved",
     "ambiguous",
   ],
-  AGE_SELECTOR: ["0-2", "2-5", "6-9", "10-13", "fine, it's not for my child"],
-  STORY_LENGTH: [
-    "super quick",
-    "kinda quick",
-    "whatever average means",
-    "chill",
-    "really chill",
-  ],
+  AGE_SELECTOR: ["0-2", "2-5", "6-9", "10-13", "14 +"],
+  STORY_LENGTH: ["short", "shorter", "decent", "longer", "long"],
 };
