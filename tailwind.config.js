@@ -8,19 +8,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        lightGray: "#D3D3D3",
         whiteSmoke: "#F5F5F5",
-        pearl: "#FCF5EF",
-        pumpkin: "#FEA735",
-        orange: "#FE7235",
-        robinBlue: "#00C3FF",
-        deepBlue: "#0077FF",
-        lightBlue: "#DDE4ED",
-        coolGray: "#CCDBE9",
-        softBlue: "#B4C9DD",
-        warmBeige: "#EDE1DB",
         softLime: "#F1FFC4",
-        darkGrey: "#595959",
         smokeyGrey: "#726E6D",
+        pastelCoral: "#FD8A8A",
+        pastelPeach: "#FFCBCB",
+        pastelPurple: "#9EA1D4",
+        pastelLime: "#F6F9D7",
+        pastelTeal: "#A8D1D1",
+        pastelBlue: "#DFEBEB",
+        blueblue: "#0000FF",
       },
     },
     fontFamily: {

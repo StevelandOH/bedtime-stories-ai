@@ -2,8 +2,8 @@ import LandingPage from "./pages/LandingPage";
 
 export default function Home() {
   return (
-    <div className="p-8 bg-gradient-to-r from-softLime via-purple-300 to-pink-300 font-[family-name:var(--font-geist-sans)] min-h-screen">
-      <main className="p-8">
+    <div className="flex items-center justify-center bg-gradient-to-tl from-pastelLime via-pastelPeach to-pastelPurple font-[family-name:var(--font-geist-sans)] min-h-screen">
+      <main>
         <LandingPage />
       </main>
       <footer
