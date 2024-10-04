@@ -2,7 +2,7 @@ import LandingPage from "./pages/LandingPage";
 
 export default function Home() {
   return (
-    <div className="p-8 bg-whiteSmoke font-[family-name:var(--font-geist-sans)] min-h-screen">
+    <div className="p-8 bg-gradient-to-r from-softLime via-purple-300 to-pink-300 font-[family-name:var(--font-geist-sans)] min-h-screen">
       <main className="p-8">
         <LandingPage />
       </main>
