@@ -2,7 +2,7 @@ import LandingPage from "./pages/LandingPage";
 
 export default function Home() {
   return (
-    <div className="flex items-center justify-center bg-gradient-to-tl from-pastelLime via-pastelPeach to-pastelPurple font-[family-name:var(--font-geist-sans)] min-h-screen">
+    <div className="flex justify-center bg-gradient-to-br from-pastelLime via-pastelPeach to-pastelPurple font-[family-name:var(--font-geist-sans)] min-h-screen">
       <main>
         <LandingPage />
       </main>
