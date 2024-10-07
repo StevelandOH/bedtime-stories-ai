@@ -1,4 +1,4 @@
-import StoryForm from "./StoryForm";
+import StoryForm from "./story-generator/page";
 
 // Exporting the metadata for this specific page
 export const metadata = {

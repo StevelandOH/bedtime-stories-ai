@@ -19,6 +19,7 @@ module.exports = {
         pastelTeal: "#A8D1D1",
         pastelBlue: "#DFEBEB",
         blueblue: "#0000FF",
+        gold: "#D4AF37",
       },
     },
     fontFamily: {

@@ -1,5 +1,5 @@
-export const SELECTOR_DATA = {
-  STORY_TYPES: [
+export const SELECTOR_TYPES = {
+  genre: [
     "adventure",
     "romance",
     "mystery",
@@ -10,7 +10,7 @@ export const SELECTOR_DATA = {
     "thriller",
     "comedy",
   ],
-  MORALS: [
+  theme: [
     "honesty",
     "kindness",
     "bravery",
@@ -21,7 +21,7 @@ export const SELECTOR_DATA = {
     "respect",
     "responsibility",
   ],
-  ENDING_TYPES: [
+  ending: [
     "happy",
     "tragic",
     "cliffhanger",
@@ -32,6 +32,6 @@ export const SELECTOR_DATA = {
     "unresolved",
     "ambiguous",
   ],
-  AGE_SELECTOR: ["0-2", "2-5", "6-9", "10-13", "14 +"],
-  STORY_LENGTH: ["short", "shorter", "decent", "longer", "long"],
+  age: ["0-2", "2-5", "6-9", "10-13", "14 +"],
+  length: ["short", "shorter", "decent", "longer", "long"],
 };
