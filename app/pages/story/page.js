@@ -9,13 +9,12 @@ export const GeneratedStory = ({ story, onBack, resubmit }) => {
     return { title, story: storyBody };
   };
 
-  // Always get an object, even if story is undefined/null
-  const { title, story: extractedStory } = extractTitleAndStory(story);
+  const { title, story: extractedStory } = extractTitleAndStory(story || "");
 
   return (
     <div className="max-w-md mx-auto p-6 rounded-lg shadow-lg">
-      <h2 className="font-bold text-2xl mb-4">{title}</h2>
-      <p className="whitespace-pre-wrap">{extractedStory}</p>
+      <h2 className="font-bold text-2xl mb-4">{title || ""}</h2>
+      <p className="whitespace-pre-wrap">{extractedStory || ""}</p>
 
       <div className="flex justify-between mt-6 space-x-4">
         {/* Back button */}
