@@ -123,7 +123,7 @@ const StoryForm = () => {
           {!loading && !story && (
             <form
               onSubmit={handleSubmit}
-              className="font-mono text-darkGrey text-center"
+              className="font-mono text-black text-center"
             >
               <div className="m-2 shadow-[-0.1rem_-0.1rem_0.1rem_0.1rem_rgb(255,255,255,0.8)] rounded-2xl">
                 <div className="shadow-[0.1rem_0.1rem_0.1rem_0.1rem_rgb(120,120,120,0.1)] drop-shadow-sm bg-whiteSmoke p-3 rounded-2xl grid grid-cols-1 gap-4">
@@ -148,8 +148,8 @@ const StoryForm = () => {
                           }}
                           className={
                             formState[currentSelectorValue] === ""
-                              ? "w-full p-3 rounded-xl font-thin text-center text-xs text-smokeyGrey text-opacity-40 bg-whiteSmoke shadow-[0.1rem_0.1rem_0.1rem_rgb(120,120,120,0.1)] focus:outline-none transition duration-200"
-                              : "w-full p-3 rounded-xl font-thin text-center text-xs text-smokeyGrey appearance-none bg-whiteSmoke shadow-[0.2rem_0.1rem_0.1rem_rgb(255,255,255,0.8)] shadow-inner-15 shadow-white  focus:outline-none transition duration-200"
+                              ? "w-full p-3 rounded-xl font-thin text-center text-xs text-black text-opacity-40 bg-whiteSmoke shadow-[0.1rem_0.1rem_0.1rem_rgb(120,120,120,0.1)] focus:outline-none transition duration-200"
+                              : "w-full p-3 rounded-xl font-thin text-center text-xs text-black appearance-none bg-whiteSmoke shadow-[0.2rem_0.1rem_0.1rem_rgb(255,255,255,0.8)] shadow-inner-15 shadow-white  focus:outline-none transition duration-200"
                           }
                           required
                         >
@@ -183,7 +183,7 @@ const StoryForm = () => {
                       newCharacter: e.target.value,
                     });
                   }}
-                  className="shadow-inner-15 shadow-white bg-whiteSmoke text-center rounded-xl appearance-none w-full shadow-[0.2rem_0.1rem_0.1rem_rgb(255,255,255,0.8)] p-3 focus:outline-none transition duration-200 text-xs text-smokeyGrey text-opacity-40 placeholder-smokeyGrey placeholder-opacity-40"
+                  className="shadow-inner-15 shadow-white bg-whiteSmoke text-center rounded-xl appearance-none w-full shadow-[0.2rem_0.1rem_0.1rem_rgb(255,255,255,0.8)] p-3 focus:outline-none transition duration-200 text-xs text-black text-opacity-40 placeholder-smokeyGrey placeholder-opacity-40"
                 />
                 <button
                   style={{ borderRadius: "0 1rem 1rem 0" }}

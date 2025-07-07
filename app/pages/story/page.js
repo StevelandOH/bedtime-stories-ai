@@ -14,7 +14,7 @@ const GeneratedStory = ({ story, onBack, resubmit }) => {
   const { title, story: extractedStory } = extractTitleAndStory(story || "");
 
   return (
-    <div className="max-w-md mx-auto p-6 rounded-lg shadow-lg">
+    <div className="max-w-md mx-auto p-6 rounded-lg shadow-lg text-black">
       <h2 className="font-bold text-2xl mb-4">{title || ""}</h2>
       <p className="whitespace-pre-wrap">{extractedStory || ""}</p>
 
