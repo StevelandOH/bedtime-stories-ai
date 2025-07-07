@@ -11,7 +11,7 @@ const GeneratedStory = dynamic(() => import("../story/page"), {
 });
 const Loading = dynamic(() => import("../Loading"), { ssr: false });
 
-export const StoryForm = () => {
+const StoryForm = () => {
   const [initialFormState, setInitialFormState] = useState({
     age: "",
     genre: "",
@@ -291,3 +291,4 @@ export const StoryForm = () => {
     </div>
   );
 };
+export default StoryForm;
