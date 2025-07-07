@@ -2,6 +2,7 @@ import Link from "next/link";
 
 const GeneratedStory = ({ story, onBack, resubmit }) => {
   const extractTitleAndStory = (storyText) => {
+    if (!storyText) return;
     const lines = storyText.split("\n");
     const title = lines.find((line) => line.trim() !== "").trim();
     const story = lines.slice(1).join("\n");
