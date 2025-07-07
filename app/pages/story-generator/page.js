@@ -11,40 +11,6 @@ const GeneratedStory = dynamic(() => import("../story/page"), {
 });
 const Loading = dynamic(() => import("../Loading"), { ssr: false });
 
-// export const metadata = {
-//   title: "Generate Bedtime Stories | BedtimeStories.AI",
-//   description:
-//     "Create personalized bedtime stories for kids using BedtimeStories.AI. Select genre, theme, and characters, and generate a unique story!",
-//   keywords: [
-//     "bedtime stories",
-//     "AI generated stories",
-//     "children's stories",
-//     "story generator",
-//     "kids storytelling",
-//   ],
-//   openGraph: {
-//     title: "Generate Bedtime Stories | BedtimeStories.AI",
-//     description:
-//       "Create personalized bedtime stories for kids using BedtimeStories.AI. Choose genre, theme, and characters for a unique adventure!",
-//     images: [
-//       {
-//         url: "/images/og-image.png", // Update this with your image path
-//         width: 1200,
-//         height: 630,
-//         alt: "BedtimeStories.AI Open Graph Image",
-//       },
-//     ],
-//     url: "https://your-domain.com", // Update with your domain
-//   },
-//   twitter: {
-//     card: "summary_large_image",
-//     title: "Generate Bedtime Stories | BedtimeStories.AI",
-//     description:
-//       "Create personalized bedtime stories for kids using BedtimeStories.AI. Select genre, theme, and characters for a unique story.",
-//     images: ["/images/og-image.png"], // Update this with your image path
-//   },
-// };
-
 const StoryForm = () => {
   const [initialFormState, setInitialFormState] = useState({
     age: "",

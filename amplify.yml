@@ -1,0 +1,21 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        - |
+          printf "NEXT_PUBLIC_GEMINI_API_KEY=%s\n" \
+          "$NEXT_PUBLIC_GEMINI_API_KEY" \
+          >> .env.production
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - "**/*"
+  cache:
+    paths:
+      - node_modules/**/*
+      - .next/cache/**/*
