@@ -2,13 +2,14 @@ import Link from "next/link";
 
 export const GeneratedStory = ({ story, onBack, resubmit }) => {
   const extractTitleAndStory = (storyText) => {
-    if (!storyText) return;
+    if (!storyText) return { title: "", story: "" };
     const lines = storyText.split("\n");
-    const title = lines.find((line) => line.trim() !== "").trim();
-    const story = lines.slice(1).join("\n");
-    return { title, story };
+    const title = lines.find((line) => line.trim() !== "")?.trim() || "";
+    const storyBody = lines.slice(1).join("\n");
+    return { title, story: storyBody };
   };
 
+  // Always get an object, even if story is undefined/null
   const { title, story: extractedStory } = extractTitleAndStory(story);
 
   return (
