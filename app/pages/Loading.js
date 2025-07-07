@@ -1,4 +1,4 @@
-const Loading = () => {
+export const Loading = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <div className="relative w-16 h-16">
@@ -10,5 +10,3 @@ const Loading = () => {
     </div>
   );
 };
-
-export default Loading;

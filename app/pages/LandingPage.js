@@ -35,12 +35,10 @@ export const metadata = {
   },
 };
 
-const LandingPage = () => {
+export const LandingPage = () => {
   return (
     <div>
       <StoryForm />
     </div>
   );
 };
-
-export default LandingPage;

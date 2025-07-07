@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const GeneratedStory = ({ story, onBack, resubmit }) => {
+export const GeneratedStory = ({ story, onBack, resubmit }) => {
   const extractTitleAndStory = (storyText) => {
     if (!storyText) return;
     const lines = storyText.split("\n");
@@ -36,5 +36,3 @@ const GeneratedStory = ({ story, onBack, resubmit }) => {
     </div>
   );
 };
-
-export default GeneratedStory;
